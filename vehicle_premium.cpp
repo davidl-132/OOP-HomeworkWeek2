@@ -110,11 +110,21 @@ int main(){
         double c;
 
         cout << "Enter type of vehicle: "; getline(cin, t);
-        cout << "Enter max speed of vehicle: "; cin >> ms;
+        cout << "Enter max speed of vehicle: ";
+        while (!(cin >> ms) || ms < 0){
+        cout << "Invalid input...!!! Please enter a non-negative number: ";
+        cin.clear();
+        cin.ignore(10000,'\n');
+        }
         cin.ignore();
         cout << "Enter fuel type of vehicle: "; getline(cin, ft);
         cout << "Enter brand of vehicle: "; getline(cin, b);
-        cout << "Enter cost of vehicle: "; cin >> c;
+        cout << "Enter cost of vehicle: ";
+        while (!(cin >> c) || c < 0){
+        cout << "Invalid input...!!! Please enter a non-negative number: ";
+        cin.clear();
+        cin.ignore(10000,'\n');
+        }
         cin.ignore();
         vehicles.emplace_back(t, ms, ft, b, c);
         cout << "Add the vehicle successfully...!" << endl;
@@ -142,7 +152,12 @@ int main(){
                     cout << "Vehicle #" << i+1 << ": " << vehicles[i].getType() << endl;
                 }
             cout << "Which one you want to accelerate ?: ";
-            int a; cin >> a;
+            int a;
+            while (!(cin >> a)) {
+                cout << "Invalid input! Please enter a number: ";
+                cin.clear();
+                cin.ignore(10000, '\n');
+            }
 
             if(a < 1 || a > vehicles.size()){
                 cout << "Cannot accelerating that vehicle...!" << endl;
@@ -161,7 +176,12 @@ int main(){
                     cout << "Vehicle #" << i+1 << ": " << vehicles[i].getType() << endl;
                 }
             cout << "Which one you want to refuel ?: ";
-            int x; cin >> x;
+            int x;
+            while (!(cin >> x)) {
+                cout << "Invalid input! Please enter a number: ";
+                cin.clear();
+                cin.ignore(10000, '\n');
+            }
 
             if(x < 1 || x > vehicles.size()){
                 cout << "Cannot refuel that vehicle...!" << endl;
@@ -180,7 +200,12 @@ int main(){
                     cout << "Vehicle #" << i+1 << ": " << vehicles[i].getType() << endl;
                 }
             cout << "Which one you want to honk ?: ";
-            int y; cin >> y;
+            int y;
+            while (!(cin >> y)) {
+                cout << "Invalid input! Please enter a number: ";
+                cin.clear();
+                cin.ignore(10000, '\n');
+            }
 
             if(y < 1 || y > vehicles.size()){
                 cout << "Cannot honk that vehicle...!" << endl;
@@ -199,7 +224,12 @@ int main(){
                     cout << "Vehicle #" << i+1 << ": " << vehicles[i].getType() << endl;
                 }
             cout << "Which one you want to check ?: ";
-            int z; cin >> z;
+            int z;
+            while (!(cin >> z)) {
+                cout << "Invalid input! Please enter a number: ";
+                cin.clear();
+                cin.ignore(10000, '\n');
+            }
 
             if(z < 1 || z > vehicles.size()){
                 cout << "Cannot check that vehicle...!" << endl;
@@ -222,9 +252,19 @@ int main(){
                     cout << "Vehicle #" << i+1 << ": " << vehicles[i].getType() << endl;
                 }
             cout << "Which is the 1st vehicle you want to check ?: ";
-            int x1; cin >> x1;
+            int x1;
+            while (!(cin >> x1)) {
+                cout << "Invalid input! Please enter a number: ";
+                cin.clear();
+                cin.ignore(10000, '\n');
+            }
             cout << "Which is the 2nd vehicle you want to check ?: ";
-            int y1; cin >> y1;
+            int y1;
+            while (!(cin >> y1)) {
+                cout << "Invalid input! Please enter a number: ";
+                cin.clear();
+                cin.ignore(10000, '\n');
+            }
 
             if(x1 < 1 || x1 > vehicles.size() || y1 < 1 || y1 > vehicles.size()){
                 cout << "Cannot check that vehicle...!" << endl;
