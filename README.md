@@ -1,22 +1,22 @@
 # Vehicle.cpp – OOP Practice Exercise
 
 ## 📌 Bài tập
-- `Vehicle.cpp` – quản lý thông tin và hành vi của phương tiện giao thông.
-
+- `vehicle.cpp` – quản lý thông tin và hành vi của phương tiện giao thông.
+- `vehicle_premium.cpp` - mở rộng quản lý thông tin và hành vi của phương tiện giao thông. (có giao diện menu)
 ---
 
 ## ⚙️ Hướng dẫn build và chạy
 
 ### Trên Linux / macOS / WSL:
 ```bash
-g++ Vehicle.cpp -o Vehicle
-./Vehicle
+g++ vehicle.cpp -o vehicle
+./vehicle
 ```
 
 ### Trên Windows (MinGW g++):
 ```bash
-g++ Vehicle.cpp -o Vehicle.exe
-Vehicle.exe
+g++ vehicle.cpp -o vehicle.exe
+vehicle.exe
 ```
 
 ---
