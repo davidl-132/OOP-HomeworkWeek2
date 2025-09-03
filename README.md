@@ -1,22 +1,33 @@
 # Vehicle.cpp – OOP Practice Exercise
 
 ## 📌 Bài tập
-- `vehicle.cpp` – quản lý thông tin và hành vi của phương tiện giao thông.
-- `vehicle_premium.cpp` - mở rộng quản lý thông tin và hành vi của phương tiện giao thông. (có giao diện menu)
+- `vehicle.cpp` – quản lý thông tin và hành vi cơ bản của phương tiện giao thông.  
+- `vehicle_premium.cpp` – **phiên bản mở rộng**, bổ sung giao diện menu để quản lý phương tiện trực quan hơn (thêm, hiển thị, tăng tốc, nạp nhiên liệu, bấm còi, so sánh giá, kiểm tra eco-friendly).  
+
 ---
 
 ## ⚙️ Hướng dẫn build và chạy
 
 ### Trên Linux / macOS / WSL:
+Ví dụ build file cơ bản:
 ```bash
 g++ vehicle.cpp -o vehicle
 ./vehicle
+```
+
+Ví dụ build file mở rộng:
+```bash
+g++ vehicle_premium.cpp -o vehicle_premium
+./vehicle_premium
 ```
 
 ### Trên Windows (MinGW g++):
 ```bash
 g++ vehicle.cpp -o vehicle.exe
 vehicle.exe
+
+g++ vehicle_premium.cpp -o vehicle_premium.exe
+vehicle_premium.exe
 ```
 
 ---
@@ -36,9 +47,15 @@ Ngoài việc khởi tạo các đối tượng tĩnh, em cũng đã sử dụng
 
 Một điểm quan trọng em rút ra là việc **xử lý nhập liệu từ người dùng**: nếu không kiểm tra kỹ, chương trình rất dễ bị **crash khi nhập sai kiểu dữ liệu** (ví dụ: nhập chữ cho `maxSpeed`). Nhờ thêm cơ chế kiểm tra và bắt nhập lại, em đã học được cách sử dụng **`cin.clear()` và `cin.ignore()`** để làm sạch bộ nhớ đệm và khôi phục trạng thái của luồng nhập.  
 
-Bài tập này giúp em củng cố khả năng **thiết kế lớp, thực hành đóng gói dữ liệu**, và xử lý tình huống thực tế khi làm việc với dữ liệu nhập từ người dùng.  
+### 🚀 Về phiên bản mở rộng `vehicle_premium.cpp`
+- Em đã thiết kế thêm **menu quản lý** để người dùng tương tác trực tiếp với chương trình.  
+- Các chức năng bổ sung: thêm phương tiện, hiển thị toàn bộ danh sách, chọn phương tiện để tăng tốc, nạp nhiên liệu, bấm còi, kiểm tra eco-friendly, và so sánh giá giữa hai phương tiện bất kỳ.  
+- Nhờ đó, em hiểu rõ hơn cách kết hợp **OOP với cấu trúc dữ liệu (`vector`)** và xử lý menu điều khiển trong chương trình C++.  
 
-👉 Nếu có thêm thời gian, em muốn cải tiến chương trình bằng cách:  
-- Định dạng lại phần hiển thị chi phí cho dễ đọc hơn.  
-- Mở rộng hệ thống phân loại phương tiện theo loại nhiên liệu.  
-- Bổ sung tính kế thừa để mô phỏng các loại phương tiện chuyên biệt hơn.  
+### 🌱 Bài học & Hướng phát triển
+- Bài tập này giúp em củng cố khả năng **thiết kế lớp, đóng gói dữ liệu**, và làm quen với **tương tác người dùng qua menu**.  
+- Nếu có thêm thời gian, em muốn:  
+  - Định dạng lại phần hiển thị chi phí cho dễ đọc hơn.  
+  - Mở rộng hệ thống phân loại phương tiện theo loại nhiên liệu.  
+  - Bổ sung tính kế thừa để mô phỏng các loại phương tiện chuyên biệt hơn.  
+  - Tích hợp lưu trữ và đọc dữ liệu từ file để quản lý phương tiện lâu dài.  
