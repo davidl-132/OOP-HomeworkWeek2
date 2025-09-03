@@ -11,11 +11,11 @@ private:
     string type;     // Loại phương tiện (ví dụ: "Car", "Truck")
     int maxSpeed;    // Tốc độ tối đa (km/h)
     string fuelType; // Loại nhiên liệu sử dụng (ví dụ: "Gasoline", "Diesel")
-    string brand;
-    double cost;
+    string brand;    // Thương hiệu phương tiện
+    double cost;     // Giá thành
 
 public:
-    //Constructor: khởi tạo để gán giá trị ban đầu cho đối tượng
+    // Constructor: khởi tạo để gán giá trị ban đầu cho đối tượng
     Vehicle(string _type, int _maxSpeed, string _fuelType, string _brand, double _cost){
         type = _type;
         maxSpeed = _maxSpeed;
@@ -24,21 +24,21 @@ public:
         cost = _cost;
     }
 
-    //Getter: dùng để lấy giá trị của thuộc tính
+    // Getter: dùng để lấy giá trị của thuộc tính
     string getType(){return type;}
     int getMaxSpeed(){return maxSpeed;}
     string getFuelType(){return fuelType;}
     string getBrand(){return brand;}
     double getCost(){return cost;}
 
-    //Setter: dùng để thay đổi giá trị của thuộc tính
+    // Setter: dùng để thay đổi giá trị của thuộc tính
     void setType(string _type){type = _type;}
     void setMaxSpeed(int _maxSpeed){maxSpeed = _maxSpeed;}
     void setFuelType(string _fuelType){fuelType = _fuelType;}
     void setBrand(string _brand){brand = _brand;}
     void setCost(double _cost){cost = _cost;}
 
-    //Method hiển thị thông tin đầy đủ của phương tiện
+    // Hiển thị thông tin đầy đủ của phương tiện
     void displayInfo(){
         cout << "--- Vehicle Information ---" << endl;
         cout << "Type: " << getType() << endl;
@@ -49,7 +49,7 @@ public:
         cout << "-------------------------" << endl;
     }
 
-    //Method mô tả hành động tăng tốc của phương tiện
+    // Mô tả hành động tăng tốc
     void accelerate(){
         if(getMaxSpeed() > 0)
             cout << "The " << getType() << " is accelerating to " << getMaxSpeed() << " km/h." << endl;
@@ -57,25 +57,30 @@ public:
             cout << "The " << getType() << " cannot accelerate because its maximum speed is 0 km/h. It is stationary." << endl;
     }
 
+    // Mô tả hành động nạp nhiên liệu
     void refuel(){
         cout << "The " << getType() << " has been refueled " << getFuelType() << " successfully!" << endl;
     }
 
+    // Mô tả hành động bấm còi
     void honk(){
         cout << "The " << getType() << " says: BEEP BEEP!" << endl;
     }
 
+    // Kiểm tra xem phương tiện có thân thiện với môi trường không
     bool isEcoFriendly(){
         string ft = getFuelType();
-        for(auto &c:ft) c = tolower(c);
+        for(auto &c:ft) c = tolower(c); // chuyển chuỗi về chữ thường
         return (ft == "electric" || ft == "hybrid" || ft == "hydrogen" || ft == "biofuel" || ft == "cng" || ft == "lpg" || ft == "solar");
     }
 
+    // So sánh chi phí giữa hai phương tiện
     bool isCheaperThan (Vehicle other){
         return this->cost < other.cost;
     }
 };
 
+// Hàm menu để hiển thị các lựa chọn cho người dùng
 void menu(){
     cout << "=====Vehicle Manager=====" << endl;
     cout << "1. Add a vehicle" << endl;
@@ -91,46 +96,48 @@ void menu(){
 }
 
 int main(){
-    vector<Vehicle> vehicles;
+    vector<Vehicle> vehicles; // danh sách các phương tiện
     int choice;
+
+    // Tạo sẵn một số phương tiện mặc định
     Vehicle v1("Car",180,"Electric","VinFast",500000000); vehicles.push_back(v1);
     Vehicle v2("Motorbike",140,"Gasoline","Honda",35000000); vehicles.push_back(v2);
     Vehicle v3("Truck",250,"Diesel","Suzuki",1500000000); vehicles.push_back(v3);
     Vehicle v4("Bike",60,"Solar","Tesla",30000000); vehicles.push_back(v4);
 
     while(true){
-        menu();
-        cin >> choice;
+        menu();              // hiển thị menu
+        cin >> choice;       // nhập lựa chọn
         cin.ignore();
-        
-        //OPTION 1
-        if(choice == 1){
-        string t, ft, b;
-        int ms;
-        double c;
 
-        cout << "Enter type of vehicle: "; getline(cin, t);
-        cout << "Enter max speed of vehicle: ";
-        while (!(cin >> ms) || ms < 0){
-        cout << "Invalid input...!!! Please enter a non-negative number: ";
-        cin.clear();
-        cin.ignore(10000,'\n');
-        }
-        cin.ignore();
-        cout << "Enter fuel type of vehicle: "; getline(cin, ft);
-        cout << "Enter brand of vehicle: "; getline(cin, b);
-        cout << "Enter cost of vehicle: ";
-        while (!(cin >> c) || c < 0){
-        cout << "Invalid input...!!! Please enter a non-negative number: ";
-        cin.clear();
-        cin.ignore(10000,'\n');
-        }
-        cin.ignore();
-        vehicles.emplace_back(t, ms, ft, b, c);
-        cout << "Add the vehicle successfully...!" << endl;
+        // OPTION 1: thêm phương tiện mới
+        if(choice == 1){
+            string t, ft, b;
+            int ms;
+            double c;
+
+            cout << "Enter type of vehicle: "; getline(cin, t);
+            cout << "Enter max speed of vehicle: ";
+            while (!(cin >> ms) || ms < 0){ // kiểm tra nhập đúng số nguyên dương
+                cout << "Invalid input...!!! Please enter a non-negative number: ";
+                cin.clear();
+                cin.ignore(10000,'\n');
+            }
+            cin.ignore();
+            cout << "Enter fuel type of vehicle: "; getline(cin, ft);
+            cout << "Enter brand of vehicle: "; getline(cin, b);
+            cout << "Enter cost of vehicle: ";
+            while (!(cin >> c) || c < 0){ // kiểm tra nhập đúng số thực không âm
+                cout << "Invalid input...!!! Please enter a non-negative number: ";
+                cin.clear();
+                cin.ignore(10000,'\n');
+            }
+            cin.ignore();
+            vehicles.emplace_back(t, ms, ft, b, c); // thêm vào vector
+            cout << "Add the vehicle successfully...!" << endl;
         } 
 
-        //OPTION 2
+        // OPTION 2: hiển thị toàn bộ danh sách phương tiện
         else if (choice == 2){
             if(vehicles.empty()){
                 cout << "No vehicles has been added yet...!" << endl;
@@ -143,7 +150,7 @@ int main(){
             }
         }
 
-        //OPTION 3
+        // OPTION 3: tăng tốc phương tiện
         else if(choice == 3){
             if(vehicles.empty()){
                 cout << "No vehicles available to accelerate. Please add first!" << endl;
@@ -151,23 +158,23 @@ int main(){
                 for(int i=0; i<vehicles.size(); i++){
                     cout << "Vehicle #" << i+1 << ": " << vehicles[i].getType() << endl;
                 }
-            cout << "Which one you want to accelerate ?: ";
-            int a;
-            while (!(cin >> a)) {
-                cout << "Invalid input! Please enter a number: ";
-                cin.clear();
-                cin.ignore(10000, '\n');
-            }
+                cout << "Which one you want to accelerate ?: ";
+                int a;
+                while (!(cin >> a)) { // kiểm tra nhập số
+                    cout << "Invalid input! Please enter a number: ";
+                    cin.clear();
+                    cin.ignore(10000, '\n');
+                }
 
-            if(a < 1 || a > vehicles.size()){
-                cout << "Cannot accelerating that vehicle...!" << endl;
-            } else {
-                vehicles[a-1].accelerate();
-            }
+                if(a < 1 || a > vehicles.size()){
+                    cout << "Cannot accelerating that vehicle...!" << endl;
+                } else {
+                    vehicles[a-1].accelerate();
+                }
             }
         }
 
-        //OPTION 4 
+        // OPTION 4: nạp nhiên liệu
         else if(choice == 4){
             if(vehicles.empty()){
                 cout << "No vehicles available to refuel. Please add first!" << endl;
@@ -175,23 +182,23 @@ int main(){
                 for(int i=0; i<vehicles.size(); i++){
                     cout << "Vehicle #" << i+1 << ": " << vehicles[i].getType() << endl;
                 }
-            cout << "Which one you want to refuel ?: ";
-            int x;
-            while (!(cin >> x)) {
-                cout << "Invalid input! Please enter a number: ";
-                cin.clear();
-                cin.ignore(10000, '\n');
-            }
+                cout << "Which one you want to refuel ?: ";
+                int x;
+                while (!(cin >> x)) { // kiểm tra nhập số
+                    cout << "Invalid input! Please enter a number: ";
+                    cin.clear();
+                    cin.ignore(10000, '\n');
+                }
 
-            if(x < 1 || x > vehicles.size()){
-                cout << "Cannot refuel that vehicle...!" << endl;
-            } else {
-                vehicles[x-1].refuel();
-            }
+                if(x < 1 || x > vehicles.size()){
+                    cout << "Cannot refuel that vehicle...!" << endl;
+                } else {
+                    vehicles[x-1].refuel();
+                }
             }
         }
 
-        //OPTION 5
+        // OPTION 5: bấm còi
         else if(choice == 5){
             if(vehicles.empty()){
                 cout << "No vehicles available to honk. Please add first!" << endl;
@@ -199,23 +206,23 @@ int main(){
                 for(int i=0; i<vehicles.size(); i++){
                     cout << "Vehicle #" << i+1 << ": " << vehicles[i].getType() << endl;
                 }
-            cout << "Which one you want to honk ?: ";
-            int y;
-            while (!(cin >> y)) {
-                cout << "Invalid input! Please enter a number: ";
-                cin.clear();
-                cin.ignore(10000, '\n');
-            }
+                cout << "Which one you want to honk ?: ";
+                int y;
+                while (!(cin >> y)) {
+                    cout << "Invalid input! Please enter a number: ";
+                    cin.clear();
+                    cin.ignore(10000, '\n');
+                }
 
-            if(y < 1 || y > vehicles.size()){
-                cout << "Cannot honk that vehicle...!" << endl;
-            } else {
-                vehicles[y-1].honk();
-            }
+                if(y < 1 || y > vehicles.size()){
+                    cout << "Cannot honk that vehicle...!" << endl;
+                } else {
+                    vehicles[y-1].honk();
+                }
             }
         }
 
-        //OPTION 6
+        // OPTION 6: kiểm tra Eco-Friendly
         else if(choice == 6){
             if(vehicles.empty()){
                 cout << "No vehicles available to check. Please add first!" << endl;
@@ -223,27 +230,27 @@ int main(){
                 for(int i=0; i<vehicles.size(); i++){
                     cout << "Vehicle #" << i+1 << ": " << vehicles[i].getType() << endl;
                 }
-            cout << "Which one you want to check ?: ";
-            int z;
-            while (!(cin >> z)) {
-                cout << "Invalid input! Please enter a number: ";
-                cin.clear();
-                cin.ignore(10000, '\n');
-            }
-
-            if(z < 1 || z > vehicles.size()){
-                cout << "Cannot check that vehicle...!" << endl;
-            } else {
-                if(vehicles[z-1].isEcoFriendly()){
-                    cout << "This " << vehicles[z-1].getType() << " is Eco-Friendly !!!" << endl;
-                } else{
-                    cout << "This " << vehicles[z-1].getType() << " is not Eco-Friendly !!!" << endl;
+                cout << "Which one you want to check ?: ";
+                int z;
+                while (!(cin >> z)) {
+                    cout << "Invalid input! Please enter a number: ";
+                    cin.clear();
+                    cin.ignore(10000, '\n');
                 }
-            }
+
+                if(z < 1 || z > vehicles.size()){
+                    cout << "Cannot check that vehicle...!" << endl;
+                } else {
+                    if(vehicles[z-1].isEcoFriendly()){
+                        cout << "This " << vehicles[z-1].getType() << " is Eco-Friendly !!!" << endl;
+                    } else{
+                        cout << "This " << vehicles[z-1].getType() << " is not Eco-Friendly !!!" << endl;
+                    }
+                }
             }
         }
 
-        //OPTION 7
+        // OPTION 7: so sánh giá giữa hai phương tiện
         else if(choice == 7){
             if(vehicles.empty()){
                 cout << "No vehicles available to check. Please add first!" << endl;
@@ -251,42 +258,45 @@ int main(){
                 for(int i=0; i<vehicles.size(); i++){
                     cout << "Vehicle #" << i+1 << ": " << vehicles[i].getType() << endl;
                 }
-            cout << "Which is the 1st vehicle you want to check ?: ";
-            int x1;
-            while (!(cin >> x1)) {
-                cout << "Invalid input! Please enter a number: ";
-                cin.clear();
-                cin.ignore(10000, '\n');
-            }
-            cout << "Which is the 2nd vehicle you want to check ?: ";
-            int y1;
-            while (!(cin >> y1)) {
-                cout << "Invalid input! Please enter a number: ";
-                cin.clear();
-                cin.ignore(10000, '\n');
-            }
+                cout << "Which is the 1st vehicle you want to check ?: ";
+                int x1;
+                while (!(cin >> x1)) {
+                    cout << "Invalid input! Please enter a number: ";
+                    cin.clear();
+                    cin.ignore(10000, '\n');
+                }
+                cout << "Which is the 2nd vehicle you want to check ?: ";
+                int y1;
+                while (!(cin >> y1)) {
+                    cout << "Invalid input! Please enter a number: ";
+                    cin.clear();
+                    cin.ignore(10000, '\n');
+                }
 
-            if(x1 < 1 || x1 > vehicles.size() || y1 < 1 || y1 > vehicles.size()){
-                cout << "Cannot check that vehicle...!" << endl;
-            } else{
-                if(vehicles[x1-1].isCheaperThan(vehicles[y1-1])){
-                    cout << vehicles[x1-1].getType() << " is cheaper than " << vehicles[y1-1].getType() << endl;
+                if(x1 < 1 || x1 > vehicles.size() || y1 < 1 || y1 > vehicles.size()){
+                    cout << "Cannot check that vehicle...!" << endl;
                 } else{
-                    cout << vehicles[x1-1].getType() << " is more expensive or equal to " << vehicles[y1-1].getType() << endl;
+                    if(vehicles[x1-1].isCheaperThan(vehicles[y1-1])){
+                        cout << vehicles[x1-1].getType() << " is cheaper than " << vehicles[y1-1].getType() << endl;
+                    } else{
+                        cout << vehicles[x1-1].getType() << " is more expensive or equal to " << vehicles[y1-1].getType() << endl;
+                    }
                 }
             }
-            }
         }
 
-        //OPTION 0 (exit)
+        // OPTION 0: thoát chương trình
         else if(choice == 0){
-        cout << "Thanks for being enjoy my program <3...!" << endl;
-        break;
+            cout << "Thanks for being enjoy my program <3...!" << endl;
+            break;
         }
+
+        // Lựa chọn không hợp lệ
         else {
-        cout << "Inappropriate choice, please try again!" << endl;
-    }
-    system("pause");
-    system("cls");
+            cout << "Inappropriate choice, please try again!" << endl;
+        }
+
+        system("pause"); // dừng màn hình (Windows)
+        system("cls");   // xóa màn hình (Windows)
     }
 }
